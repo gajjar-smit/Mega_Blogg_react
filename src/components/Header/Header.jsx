@@ -49,7 +49,7 @@ const Header = () => {
           </Link>  
           </div>
 
-          <ul className='flex ml-auto'> 
+          <ul className=' ml-auto  flex flex-col sm:flex-row'> 
             {navItems.map((item)=>( 
 
               item.active ? ( 
