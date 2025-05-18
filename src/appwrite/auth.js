@@ -55,7 +55,7 @@ export class AuthService{
      async logout(){
         try {
             
-            this.account.deleteSessions()
+           return this.account.deleteSessions()
         } catch (error) {
             throw error
         }
