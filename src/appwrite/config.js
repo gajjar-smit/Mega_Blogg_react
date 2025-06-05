@@ -1,7 +1,7 @@
 import conf from "../conf/conf";
 import { Client,ID,Databases,Storage,Query } from "appwrite";
 
-export class Service{
+class Service{
 
     client =new Client()
     database;
@@ -12,6 +12,8 @@ export class Service{
         .setProject(conf.appwriteProjectId);
         this.database=new Databases(this.client);
         this.bucket=new Storage(this.client);
+        console.log("appwrite",conf.appwriteProjectId);
+        
     }
 
     async createPost({title,slug,content,featuredimage,status,userid}){
@@ -86,15 +88,16 @@ export class Service{
 
     async getPosts(queries=[Query.equal("status","active")]){
         try {
-            return await this.database.listDocuments(
+            return await this.database.listDocuments( 
                 conf.appwriteDbId,
                 conf.appwriteCollectionId,
-                queries,
+                []
+                // queries,
                 // 100,
                 // 0          
             )
         } catch (error) {
-            return false
+            return error
         }
     }
 
@@ -139,6 +142,6 @@ export class Service{
     }
 }
 
-const service=new Service() 
+const authService=new Service() 
 
 export default service;
