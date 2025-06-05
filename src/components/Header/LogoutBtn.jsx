@@ -9,7 +9,7 @@ const LogoutBtn = () => {
     const logoutHandler=()=>{
         authService.logout().then(()=>{
             dispatch(logout())
-            navigation('/Home')
+            navigation('/')
 
         })
     }
