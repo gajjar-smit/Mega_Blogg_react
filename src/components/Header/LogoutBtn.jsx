@@ -9,6 +9,8 @@ const LogoutBtn = () => {
     const logoutHandler=()=>{
         authService.logout().then(()=>{
             dispatch(logout())
+            console.log("user logged out");
+            
             navigation('/')
 
         })
