@@ -18,11 +18,13 @@ export class AuthService{
         try{
 
             const userAccount=await this.account.create(ID.unique(),email,password,name)
+            console.log("user account created",userAccount);
+            
 
             if (userAccount) {
                 // return userAccount
                 // another method
-                await this.login({email,password})
+                return await this.login({email,password})
                 // const user = await this.getCurrentUser()
                 // return user
             }
@@ -49,13 +51,19 @@ export class AuthService{
             return await this.account.get();
         } catch (error) {
             throw error;
-        }
-        return null;
+        } 
      }
      async logout(){
         try {
             
            return this.account.deleteSessions()
+        } catch (error) {
+            throw error
+        }
+     }
+     async getUserById(userId){
+        try {
+           return await this.account.get(userId)  
         } catch (error) {
             throw error
         }

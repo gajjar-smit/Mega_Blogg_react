@@ -1,23 +1,33 @@
-import React,{useEffect,useState} from 'react'
+import React, { useEffect, useState } from 'react'
 import appwriteService from "../appwrite/config"
-import {Container,Postcard} from "../components/index"
+import { Container, Postcard } from "../components/index"
 
 
 const Home = () => {
 
     const [posts, setPosts] = useState([])
+
+    const fetchPosts = async () => {
+
+        const fetchedpost = await appwriteService.getPosts()
+        console.log("fetched post", fetchedpost);
+        
+        if (fetchedpost) {
+            setPosts(fetchedpost.documents)
+
+        }
+        console.log("displayed post",posts);
+        
+    }
     useEffect(() => {
-        appwriteService.getPosts().then((post) => {
-            if (post) {
-                setPosts(post.documents)
-                // console.log(post.documents);
-                
-            }
-        })
+
+        fetchPosts()
     }, [])
 
 
-  if (posts.length===0){
+
+
+if (posts.length === 0) {
     return (
         <div className="w-full py-8 mt-4 text-center">
             <Container>
@@ -31,9 +41,9 @@ const Home = () => {
             </Container>
         </div>
     )
-    
-  }
-  return (
+
+}
+return (
     <div className='w-full py-8'>
         <Container>
             <div className='flex flex-wrap'>

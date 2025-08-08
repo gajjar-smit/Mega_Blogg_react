@@ -8,7 +8,7 @@ import { login } from '../store/authSlice'
 
 
 const Singup = () => {
-    const navigation = useNavigate()
+    const navigation = useNavigate();
     const [error, setError] = useState("")
     const dispatch = useDispatch()
     const { register, handleSubmit } = useForm()
@@ -18,9 +18,12 @@ const Singup = () => {
         try {
 
             const userdata = await authService.createAccount(data)
+            console.log("userdata",userdata);
+            
             if (userdata) {
                 const userData = await authService.getCurrentUser()
                 if (userData) dispatch(login(userData));
+                console.log("current user",userData);
                 navigation('/')
             }
 
@@ -28,6 +31,8 @@ const Singup = () => {
             setError(error.message)
         }
     }
+
+
     return (
         <div className='flex items-center justify-center w-full' >
             <div className={`mx-auto w-full max-w-lg bg-gray-100 rounded-xl p-10 border border-black/10`}>
@@ -73,6 +78,7 @@ const Singup = () => {
 
                         <Input
                         label="Password: "
+                        type="password"
                         placeholder="enter your password"
                         {...register("password",{
                             required:true

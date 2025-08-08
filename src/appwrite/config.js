@@ -91,13 +91,12 @@ class Service{
             return await this.database.listDocuments( 
                 conf.appwriteDbId,
                 conf.appwriteCollectionId,
-                []
-                // queries,
-                // 100,
+                queries,
+                100,
                 // 0          
             )
         } catch (error) {
-            return error
+            throw error
         }
     }
 
@@ -142,6 +141,6 @@ class Service{
     }
 }
 
-const authService=new Service() 
+const service=new Service() 
 
 export default service;
